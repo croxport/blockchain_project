@@ -1,20 +1,33 @@
-from blockchain import Blockchain  # Import the Blockchain class from blockchain.py
+from blockchain import Blockchain
 
 # Initialize the blockchain
-my_blockchain = Blockchain()
+gold_blockchain = Blockchain()
+print(f"Welcome to the {gold_blockchain.coin_name} Blockchain!")
 
-# Add some blocks with sample data
-my_blockchain.add_block("Alice sends 5 coins to Bob")
-my_blockchain.add_block("Bob sends 2 coins to Charlie")
+# Add some transactions
+gold_blockchain.add_transaction("Alice", "Bob", 10)
+gold_blockchain.add_transaction("Charlie", "Alice", 5)
+
+# Mine a block
+print(f"Mining block for {gold_blockchain.coin_name}...")
+gold_blockchain.mine_pending_transactions("Miner1")
+
+# Add more transactions
+gold_blockchain.add_transaction("Bob", "Charlie", 7)
+gold_blockchain.add_transaction("Alice", "Charlie", 3)
+
+# Mine another block
+print(f"Mining another block for {gold_blockchain.coin_name}...")
+gold_blockchain.mine_pending_transactions("Miner2")
 
 # Print the blockchain
-for block in my_blockchain.chain:
+for block in gold_blockchain.chain:
     print(f"Index: {block.index}")
     print(f"Timestamp: {block.timestamp}")
-    print(f"Data: {block.data}")
+    print(f"Transactions: {block.transactions}")
     print(f"Previous Hash: {block.previous_hash}")
     print(f"Hash: {block.hash}")
     print("-" * 30)
 
 # Validate the blockchain
-print("Is blockchain valid?", my_blockchain.is_chain_valid())
+print("Is blockchain valid?", gold_blockchain.is_chain_valid())
